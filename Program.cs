@@ -1,9 +1,9 @@
 ﻿int N;
 
-List<String> FindAllOfLengthLessThan3Strings(int N)
+String[] FindAllOfLengthLessThan3Strings(int N)
 {
     String[] arrayStr = new String[N];
-    List<String> resultingList = new List<String>();
+    String[] resultingList = new String[N];
     int EmptyStringAmount = 0;
     for (int i = 0; i < N; ++i)
     {
@@ -18,16 +18,17 @@ List<String> FindAllOfLengthLessThan3Strings(int N)
         String currentString = Console.ReadLine();
         if (String.IsNullOrEmpty(currentString))
         {
-            resultingList.Add("<EmptyString>");
+            resultingList[EmptyStringAmount] = "<EmptyString>";
             EmptyStringAmount++;
         }
         else 
             arrayStr[i-EmptyStringAmount] = currentString;
     }
+    int pos = 0;
     for (int i = 0; i < arrayStr.Length-EmptyStringAmount; ++i)
     {
         if (arrayStr[i].Length < 4)
-            resultingList.Add(arrayStr[i]);
+            resultingList[EmptyStringAmount+pos++] = arrayStr[i];
     }
     return resultingList;
 }
@@ -35,7 +36,7 @@ List<String> FindAllOfLengthLessThan3Strings(int N)
 
 Console.WriteLine("Input string amount");
 N = Convert.ToInt32(Console.ReadLine());
-List<String> resList = FindAllOfLengthLessThan3Strings(N);
+String[] resList = FindAllOfLengthLessThan3Strings(N);
 Console.ForegroundColor = ConsoleColor.Red;
 Console.WriteLine("Resulting String: [" + String.Join(", ", resList) + "]");
 Console.ForegroundColor = ConsoleColor.White;
